@@ -1,0 +1,63 @@
+<h1 class="mb-5 font-[DynaPuff] text-[36px] font-bold text-[#EE8D29]">
+  Learn, Cook, Eat <span class="text-[#DF6342]">Your Food</span>
+</h1>
+
+<ul
+  class="sm:flex hidden mt-8 flex-wrap gap-4 font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 cursor-pointer"
+>
+  <li class="me-2">
+    <a
+      aria-current="page"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLink="/category/all"
+      routerLinkActive="active"
+      class="font-[DynaPuff] inline-block catLink px-4 py-2 border transition-all hover:shadow-xl shadow duration-300 rounded-full hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+      data-discover="true"
+      >All</a
+    >
+  </li>
+  @for (category of categories(); track $index) {
+  <li class="me-2">
+    <a
+      [routerLink]="['/category/', category.strCategory]"
+      routerLinkActive="active"
+      aria-current="page"
+      class="font-[DynaPuff] inline-block catLink px-4 py-2 border transition-all hover:shadow-xl shadow duration-300 rounded-full hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+      data-discover="true"
+      >{{ category.strCategory }}</a
+    >
+  </li>
+  }
+</ul>
+
+<div
+  class="meals mt-24 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-20 font-[DynaPuff]"
+>
+@for (meal of meals(); track $index) {
+
+ <div
+    class="meal text-center hover:shadow-xl group hover:scale-105 duration-300 transition-all bg-white p-12 pb-4 rounded-[35px]"
+  >
+    <img
+      [src]=" meal.strMealThumb "
+      class="w-full group-hover:rotate-[360deg] duration-700 transition-all rounded-full drop-shadow-xl -translate-y-20 shadow-2xl"
+      [alt]="meal.strMeal"
+    />
+    <h3 class="font-semibold -mt-12  tracking-wider text-xl">
+      {{ meal.strMeal | slice:0:10 }}...
+    </h3>
+@if (meal.strArea) {
+    <p class="my-2  text-[#16a74e] font-bold text-[15px]"><i class="fa-solid fa-flag  me-2 " ></i> {{ meal.strArea }}</p>
+}
+   <button
+  [routerLink]="['/mealdetails/', meal.idMeal]"
+  class="text-white bg-gradient-to-r from-emerald-500 to-emerald-600 mt-4 font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 px-8 py-2 rounded-full"
+>
+  View Recipe
+</button>
+
+  </div>
+}
+
+ 
+</div>
